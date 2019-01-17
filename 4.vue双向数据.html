@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            请输入内容<input type="text" v-model="msg">
+
+            <button @click='add'>点击我吧input的内容放到数组里面去</button>
+    
+            <ul>
+    
+                <li v-for="(item,index) of list"> {{item}} </li>
+    
+            </ul>
+    </div>
+       
+    <script>
+    
+        new Vue({
+            el:"#app",
+            data:{
+                msg:'我是真双向数据绑定',
+                list:['姚明','褚鸿翔','周开放']
+            },
+            methods:{
+                add(){
+                    this.list.push(this.msg)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

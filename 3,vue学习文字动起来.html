@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <h2 :class="['red']">{{ str }}</h2>
+        <button @click='move'>点击让文字跑起来</button>
+        <button @click='stop'>点击让文字停下来</button>
+    </div>
+
+    <script>
+    
+            new Vue({
+                el:"#app",
+                data:{
+                    str:'Vue学习中,非常好',
+                    timeId:''
+                },
+                
+                methods:{
+                    
+                    move(){
+                        clearInterval(this.timeId)
+                         this.timeId =  setInterval(() => {
+
+                            var start = this.str.substring(0,1)
+                            var end = this.str.substring(1)
+                            this.str = end + start
+
+                        },100)
+                    },
+                    stop(){
+                        clearInterval(this.timeId)
+                    }
+                }
+            })
+
+    </script>
+</body>
+</html>

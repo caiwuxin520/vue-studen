@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color:blue
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h1 v-bind:title='msg' :class="['red',flag?'blue':'']">我是动态绑定一个属性</h1>
+        <h2 :title="msg">我是第二个动态属性</h2>
+        <h1 :data-id="msg">我是一个动态属性</h1>
+
+        <button @click='dianwo'>点我试试</button>
+        <!-- es5写法 -->
+        <ul>
+            <li v-for="(item,index) in list"> name: {{ item }} --------- 序号:{{  index +1 }}</li>
+        </ul>
+
+         <!-- es6写法 -->
+         <ul>
+            <li v-for="(item,index) of list"> name: {{ item }} --------- 序号:{{  index +1 }}</li>
+        </ul>
+
+
+        <ul>
+            <li v-for="(item,key) of obj">{{ item }}------------{{key}}</li>
+        </ul>
+    </div>
+    
+
+  
+    <script>
+    
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'我是一个title',
+                flag:true,
+                list:['周开放','褚鸿翔','雷成洁'],
+                obj:{
+                    id:1,
+                    name:'开放',
+                    des:'最骚'
+                }
+            },
+            methods:{
+                dianwo(){
+                   this.flag = !this.flag
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.min.js"></script>
+</head>
+<body>
+
+
+    <div class="aps">
+
+        <div>{{msg}}</div>
+        <div v-html='msg1'></div>
+        <div v-text='msg1'></div>
+        <div v-show='flag'>我要显示</div>
+        <div v-on:click = 'dianwo '>来点我啊</div>
+    </div>
+
+    <div>{{ msg }}</div>
+</body>
+</html>
+
+<script>
+
+     new Vue({
+        el:'.aps',
+        data:{
+            msg:'vue入门',
+            msg1:'<h1>vue入门<h1>',
+            flag:true
+        },
+        methods:{
+            dianwo(){
+                this.flag = !this.flag
+            }
+        }
+    })
+
+</script>
