@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <comm1></comm1>
+        <login></login>
+    </div>
+
+    <hr>
+
+    <div id="app2">
+        <comm1></comm1>
+        <login></login>
+    </div>
+
+
+    <template id="tmp1">
+        <h1>我是全局template组件</h1>
+    </template>
+
+
+    <template id="tmp2">
+        <h1>我是私有的template组件</h1>
+    </template>
+
+    <script>
+        Vue.component("comm1",{
+            template:"#tmp1"
+        })
+
+        var vm1 = new Vue({
+            el:"#app1",
+            data:{},
+            methods: {},
+        })
+
+        var vm2 = new Vue({
+            el:"#app2",
+            data:{},
+            methods: {},
+            components:{ //定义私有的template组件
+                login:{
+                    template:"#tmp2"
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

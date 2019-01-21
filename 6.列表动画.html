@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        li{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            border: 1px dashed  #CCC;
+        }
+        li:hover{
+            background-color: hotpink;
+            transition: all 1s ease;
+        }
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(50px)
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all .6s ease;
+        }
+
+        /* 下面的 .v-move 和 .v-leave-active 配合使用，能够实现列表后续的元素，渐渐地漂上来的效果 */
+        .v-move{
+            transition: all .6s ease;
+        }
+
+        .v-leave-active{
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        
+        <label>
+            Id: 
+            <input type="text" v-model="id">
+        </label>
+        <label>
+            Name: 
+            <input type="text" v-model="name">
+        </label>
+        <input type="button" value="添加" @click="add">
+
+         <!-- 给 ransition-group 添加 appear 属性，实现页面刚展示出来时候，入场时候的效果 -->
+        <transition-group tag="ul" appear>
+                <li v-for="(item,i) in list" :key="item.id" @click="del(i)">
+                    {{ item.id }} ------- {{ item.name }}
+                </li>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                id:"",
+                name:"",
+                list:[
+                    {id:1,name:"宝马"},
+                    {id:2,name:"奔驰"},
+                    {id:3,name:"奥迪"},
+                    {id:4,name:"丰田"},
+                    {id:5,name:"本田"}
+                ]
+            },
+            methods: {
+                add(){
+                    this.list.push({id:this.id,name:this.name})
+                    this.id = this.name = ""
+                },
+                del(id){
+                //传id
+                //    this.list.splice(this.list.findIndex(item => item.id === id),1)
+                //传索引
+                this.list.splice(id,1)
+                }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

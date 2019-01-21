@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        .ball{
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+   
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="小球" @click="flag=!flag">
+        <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @alter-enter="alterEnter"
+        >
+            <div class="ball" v-if="flag"></div>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false
+            },
+            methods: {
+                
+                beforeEnter(el){
+                    //动画还没开始,设置小球起始位置
+                    el.style.transform = " translate(0,0)"
+                },
+                enter(el,done){
+                    //enter表示动画开始后,写结束时候的位置
+                    el.offsetWidth
+                    el.style.transform = "translate(200px,200px)"
+                    el.style.transition = "all 1s ease"
+                    //这里的done() ,起始就是alterEnter函数, 是alterEnter函数的引用
+                    done()
+                },
+                alterEnter(){
+                    //动画完成后,会调用alterEnter
+                    this.flag  = !this.flag
+                }
+
+            },
+        })
+    </script>
+
+</body>
+
+</html>

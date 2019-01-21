@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 300px;
+        }
+    </style>
+    <script src="vue.js"> </script>
+    <link rel="stylesheet" href="animate.css">
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="点击" @click="flag = !flag">
+
+        <!-- <transition
+            enter-active-class="animated  wobble"
+            leave-active-class="animated  wobble"
+        >
+            <h1 v-if="flag">我是动画1</h1>
+        </transition> -->
+
+        <!-- 使用 :duration="毫秒值" 来统一设置 入场 和 离场 时候的动画时长 -->
+        <!-- <transition enter-active-class="animated  wobble" leave-active-class="animated  wobble" :duration="2000">
+            <h1 v-if="flag">我是动画1</h1>
+        </transition> -->
+
+        <transition 
+            enter-active-class="jello" 
+            leave-active-class="jello" 
+            :duration="{enter:200, leave:400}">
+                <h1 v-if="flag" class="animated">我是动画1</h1>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false
+            }
+        })
+    </script>
+
+</body>
+
+</html>
