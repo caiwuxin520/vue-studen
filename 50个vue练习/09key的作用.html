@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 不加key -->
+        用户名: <input v-if="flag">
+        邮箱: <input v-else-if>
+
+        <hr>
+        <hr>
+        <!-- 加key -->
+        用户名: <input v-if="flag"  key="username">
+        邮箱: <input v-else-if key="useremail">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods: {
+                change(){
+                    setInterval(()=>{
+                        this.flag = false
+                    },2000)
+                }
+            },
+            mounted() {
+                this.change() 
+            },
+        })
+    </script>
+</body>
+</html>

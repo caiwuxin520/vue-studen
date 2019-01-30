@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ full }}
+        <p>{{msg}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                first:"你",
+                last:"好",
+                msg:"大家好"
+            },
+            computed: {
+                full(){
+                    console.log("计算一次")
+                    return this.first + this.last
+                }
+            },
+            methods: {
+                show(){
+                    setInterval(()=>{
+                        this.msg = "我改变了"
+                    },2000)
+                }
+            },
+            mounted() {
+                this.show()
+            },
+        })
+    </script>
+</body>
+</html>
