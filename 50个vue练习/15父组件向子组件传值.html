@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用v-bind绑定是数值类型 -->
+        <item1 :conter="0"></item1>
+        <item1 :conter="1"></item1>
+
+        <hr>
+
+        <item2 conter='0'></item2>
+        <item2 conter="1"></item2>
+    </div>
+    <script>
+        var  item = {
+            props:["conter"],
+            template:"<div>{{conter}}</div>",
+            created() {
+                console.log(typeof(this.conter))   
+            }
+            //因为父组件向子组件传值是 单向数据流,所以不要改变数据
+        }
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            components:{
+                item1:item,
+                item2:item
+            }
+        })
+    </script>
+</body>
+</html>

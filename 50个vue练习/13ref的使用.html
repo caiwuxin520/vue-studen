@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>使用ref获取DOM元素内容</h1>
+        <p @click="getCont"  ref="hello">我是DOM元素</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            methods: {
+                getCont(){
+                    alert(this.$refs.hello.innerHTML)
+                }   
+            }
+        })
+    </script>
+</body>
+</html>

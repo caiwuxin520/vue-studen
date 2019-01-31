@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item :conter="2" @fasong="add"></item>
+        <item :conter="3" @fasong="add"></item>
+        <h1>{{totol}}</h1>
+    </div>
+
+    <script>
+        var item = {
+            props:["conter"],
+            data(){
+                return {
+                    num:this.conter
+                }
+            },
+            template:"<div @click='getCont'>{{num}}</div>",
+            methods: {
+                getCont(){
+                    this.num = this.num + 2
+                    this.$emit('fasong',2) //2 代表每次在加2 
+                }   
+            }
+        }
+
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                totol:5
+            },
+            components:{
+                item
+            },
+            methods:{
+                add(step){
+                    this.totol += step
+                }
+            }
+        })
+    </script>
+</body>
+</html>

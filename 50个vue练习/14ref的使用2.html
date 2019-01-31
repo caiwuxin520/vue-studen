@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>ref 的使用  如果是一个组件,使用$refs获取到的是子组件的实例引用</h2>
+        <item @fasong="cont" ref="one"></item>
+        <item @fasong="cont"  ref="two"></item>
+        <p>{{totol}}</p>
+    </div>
+    <script>
+        Vue.component('item',{
+            template:"<div @click='add'>{{num}}</div>",
+            data(){
+                return {
+                    num:0
+                }
+            },
+            methods:{
+                add(){
+                    this.num++
+                    this.$emit("fasong")
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                totol:0
+            },
+            methods: {
+                cont(){
+                    this.totol = this.$refs.one.num + this.$refs.two.num
+                }   
+            }
+        })
+    </script>
+</body>
+</html>
