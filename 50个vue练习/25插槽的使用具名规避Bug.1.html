@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item>
+            <header slot="header">我是头部</header>
+            <footer slot="footer">我是底部</footer>
+        </item>
+    </div>
+    <script>
+        Vue.component('item',{
+            template:`<div>
+                <slot name='header'></slot>
+                <div>我是中间的主体内容</div>
+                <slot name='footer'></slot>
+            </div>`
+        })
+        var vm = new Vue({
+            el:"#app",
+            data:{}
+        })
+    </script>
+</body>
+</html>

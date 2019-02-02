@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item content="hello"></item>
+        <item content="world"></item>   
+    </div>
+    <script>
+        Vue.prototype.buss = new Vue(); //在Vue的原型上绑定Bus属性
+        Vue.component('item',{
+            props:{
+                content:String
+            },
+            data(){
+                return {
+                    msg:this.content
+                }
+            },
+            template:"<h1 @click='handel'>{{msg}}</h1>",
+            methods: {
+                handel(){
+                    this.buss.$emit('change',this.msg)
+                }
+            },
+            mounted() {
+                this.buss.$on('change',(val) => {
+                    console.log(val)
+                    this.msg = val
+                })
+            },
+        })
+        var vm = new Vue({
+            el:"#app",
+            data:{}
+        })
+    </script>
+</body>
+</html>
