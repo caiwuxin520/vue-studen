@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <item :flags=flag>
+                <div>hello</div>
+            </item>
+            <item :flags=flag>
+                    <div>world</div>
+            </item>
+        <button @click="change">点击切换</button>
+    </div>
+    <script>
+        Vue.component('item',{
+            props:['flags'],
+            template:`
+                <transition
+                @before-enter="beforeEnter"
+                @enter="Enter"
+                @after-enter="afterEnter"
+                >
+                    <slot v-if="flags"></slot>
+                </transition>
+            `,
+            methods:{
+                beforeEnter(el){
+                    el.style.color="red"
+                },
+                Enter(el,done){
+                    setTimeout(() => {
+                        el.style.fontSize="40px"
+                        el.style.backgroundColor="pink"
+                    }, 1000);
+                    setTimeout(()=>{
+                        done()
+                    },2000)
+                },
+                afterEnter(el){
+                    el.style.fontSize="15px"
+                    el.style.backgroundColor=""
+                }
+
+            }
+        })
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods: {
+                change(){
+                    this.flag = !this.flag
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>

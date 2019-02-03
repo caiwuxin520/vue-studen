@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="animate.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition 
+        @before-leave="beforHandel"
+        @leave="enterHandel"
+        @after-leave="afterenterHandel"
+        >
+            <div v-show="flag">hello world</div>
+        </transition>
+        <button @click="change">点击切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods: {
+                change(){
+                    this.flag = !this.flag
+                },
+                beforHandel(el){
+                    el.style.opacity=0
+                },
+                enterHandel(el,done){
+                    setTimeout(()=>{
+                        Velocity(()=>{
+                            opacity:1
+                        },{
+                            duration:1000,
+                            complete:done
+                        })
+                    },2000)
+                    setTimeout(()=>{
+                        done()
+                    },4000)
+                },
+                afterenterHandel(el){
+                    console.log('完成动画')
+                    el.style.fontSize="15px"
+                    el.style.backgroundColor=""
+                }
+            },
+
+        })
+
+        //有bug
+    </script>
+</body>
+</html>
